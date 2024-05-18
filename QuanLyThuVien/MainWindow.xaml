@@ -1,0 +1,158 @@
+﻿<Window x:Class="QuanLyThuVien.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QuanLyThuVien"
+        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:QuanLyThuVien.UserControlLibrary"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource MainVM}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Name="mainWindow"
+        Title="Quản lý thư viện" Height="600" Width="1100">
+
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="215"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="50"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
+                                CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=mainWindow}"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid x:Name="GridMenu" Width="50" HorizontalAlignment="Left" Background="DimGray">
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
+                    </Grid.Effect>
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <Grid Height="150" Background="White" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Button x:Name="ButtonOpenMenu" Command="{Binding OpenMenuCommand}" Visibility="{Binding ButtonOpenMenu}"  Height="60" Width="50" VerticalAlignment="Top" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" HorizontalAlignment="Right">
+                                <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Menu" Width="25" Height="25"/>
+                            </Button>
+                            <Button x:Name="ButtonCloseMenu" Command="{Binding CloseMenuCommand}" Visibility="{Binding ButtonCloseMenu}" Height="60" Width="50" Margin="0" HorizontalAlignment="Right" 
+                                    VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black">
+                                <materialDesign:PackIcon Kind="ArrowLeft"  HorizontalAlignment="Center" Width="25" Height="25"/>
+                            </Button>
+                            <Image x:Name="imgProfile" Margin="25" Source="\user.jpg">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <i:InvokeCommandAction Command="{Binding OpenProfileCommand}" CommandParameter="{Binding ElementName=imgProfile}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                            <Label Content="Admin" HorizontalContentAlignment="Center" FontFamily="Times New Roman" Height="33" Margin="36,162,36,0" VerticalAlignment="Top" FontSize="20"/>
+                        </Grid>
+                        <ListView x:Name="ListViewMenu"  Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding OpenUCCommand}" 
+                                   CommandParameter="{Binding ElementName=ListViewMenu}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListViewItem x:Name="DocGia" Height="50" FontSize="16">
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon Kind="Contacts" Height="20" Width="20" Margin="5"/>
+                                    <TextBlock Text="Quản lý độc giả" VerticalAlignment="Center" Margin="10 0" FontFamily="Times New Roman"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="PhieuMuon" Height="50">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="LibraryShelves" Height="20" Width="20" Margin="5"/>
+                                    <TextBlock Text="Quản lý phiếu mượn" VerticalAlignment="Center" Margin="10 0" FontFamily="Times New Roman" FontSize="16"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Sach" Height="50">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ImportContacts" Height="20" Width="20" Margin="5"/>
+                                    <TextBlock Text="Quản lý sách" VerticalAlignment="Center"  Margin="10 0" FontFamily="Times New Roman" FontSize="16"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="NhanVien" Height="50">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="AccountBox" Height="20" Width="20" Margin="5"/>
+                                    <TextBlock Text="Quản lý nhân viên" VerticalAlignment="Center"  Margin="10 0" FontFamily="Times New Roman" FontSize="16"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="QuyDinh" Height="50">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Edit" Height="20" Width="20" Margin="5"/>
+                                    <TextBlock Text="Thay đổi quy định" VerticalAlignment="Center"  Margin="10 0" FontFamily="Times New Roman" FontSize="16"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="ThongKe" Height="50">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="LibraryBookmark" Height="20" Width="20" Margin="5"/>
+                                    <TextBlock Text="Báo cáo thống kê" VerticalAlignment="Center"  Margin="10 0" FontFamily="Times New Roman" FontSize="16"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="DangXuat" Height="50">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Logout" Height="25" Width="25" Margin="5"/>
+                                    <TextBlock Text="Đăng xuất" VerticalAlignment="Center"  Margin="10 0" FontFamily="Times New Roman" FontSize="16"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+            <Grid Name="GridMain" Grid.Column="1" Margin="5" >
+                <UserControl Content="{Binding contentControl}" ></UserControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

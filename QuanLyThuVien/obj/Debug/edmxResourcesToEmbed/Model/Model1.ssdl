@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLyThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLyThuVien.dbo.CHITIETPHIEUMUON' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CHITIETPHIEUMUON">
+    <Key>
+      <PropertyRef Name="MaPM" />
+      <PropertyRef Name="MaSach" />
+      <PropertyRef Name="TinhTrang" />
+      <PropertyRef Name="NgayTra" />
+      <PropertyRef Name="Xoa" />
+    </Key>
+    <Property Name="MaPM" Type="int" Nullable="false" />
+    <Property Name="MaSach" Type="int" Nullable="false" />
+    <Property Name="TinhTrang" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="NgayTra" Type="date" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DOCGIA">
+    <Key>
+      <PropertyRef Name="MaDG" />
+    </Key>
+    <Property Name="MaDG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" Nullable="false" />
+    <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SoDienThoai" Type="char" MaxLength="11" Nullable="false" />
+    <Property Name="NgayLapThe" Type="date" Nullable="false" />
+    <Property Name="MaLDG" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOAIDG">
+    <Key>
+      <PropertyRef Name="MaLDG" />
+    </Key>
+    <Property Name="MaLDG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenLDG" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOAINV">
+    <Key>
+      <PropertyRef Name="MaLNV" />
+    </Key>
+    <Property Name="MaLNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenLNV" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOAISACH">
+    <Key>
+      <PropertyRef Name="MaLS" />
+    </Key>
+    <Property Name="MaLS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenLS" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NHANVIEN">
+    <Key>
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNV" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" Nullable="false" />
+    <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SoDienThoai" Type="char" MaxLength="11" Nullable="false" />
+    <Property Name="TenDangNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaLNV" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PHIEUMUON">
+    <Key>
+      <PropertyRef Name="MaPM" />
+    </Key>
+    <Property Name="MaPM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayMuon" Type="datetime" Nullable="false" />
+    <Property Name="NgayHenTra" Type="datetime" Nullable="false" />
+    <Property Name="MaDG" Type="int" Nullable="false" />
+    <Property Name="MaNV" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QUYDINH">
+    <Key>
+      <PropertyRef Name="MaQD" />
+    </Key>
+    <Property Name="MaQD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenQD" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GiaTri" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TinhTrang" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SACH">
+    <Key>
+      <PropertyRef Name="MaSach" />
+    </Key>
+    <Property Name="MaSach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSach" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TacGia" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NamXB" Type="int" Nullable="false" />
+    <Property Name="NhaXB" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgayNhap" Type="date" Nullable="false" />
+    <Property Name="TinhTrang" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SoLuong" Type="int" Nullable="false" />
+    <Property Name="MaLS" Type="int" Nullable="false" />
+    <Property Name="Xoa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_CHITIETPHIEUMUON_PHIEUMUON">
+    <End Role="PHIEUMUON" Type="Self.PHIEUMUON" Multiplicity="1" />
+    <End Role="CHITIETPHIEUMUON" Type="Self.CHITIETPHIEUMUON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PHIEUMUON">
+        <PropertyRef Name="MaPM" />
+      </Principal>
+      <Dependent Role="CHITIETPHIEUMUON">
+        <PropertyRef Name="MaPM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHITIETPHIEUMUON_SACH">
+    <End Role="SACH" Type="Self.SACH" Multiplicity="1" />
+    <End Role="CHITIETPHIEUMUON" Type="Self.CHITIETPHIEUMUON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SACH">
+        <PropertyRef Name="MaSach" />
+      </Principal>
+      <Dependent Role="CHITIETPHIEUMUON">
+        <PropertyRef Name="MaSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCGIA_LOAIDG">
+    <End Role="LOAIDG" Type="Self.LOAIDG" Multiplicity="1" />
+    <End Role="DOCGIA" Type="Self.DOCGIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAIDG">
+        <PropertyRef Name="MaLDG" />
+      </Principal>
+      <Dependent Role="DOCGIA">
+        <PropertyRef Name="MaLDG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NHANVIEN_LOAINV">
+    <End Role="LOAINV" Type="Self.LOAINV" Multiplicity="1" />
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAINV">
+        <PropertyRef Name="MaLNV" />
+      </Principal>
+      <Dependent Role="NHANVIEN">
+        <PropertyRef Name="MaLNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PHIEUMUON_DOCGIA">
+    <End Role="DOCGIA" Type="Self.DOCGIA" Multiplicity="1" />
+    <End Role="PHIEUMUON" Type="Self.PHIEUMUON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOCGIA">
+        <PropertyRef Name="MaDG" />
+      </Principal>
+      <Dependent Role="PHIEUMUON">
+        <PropertyRef Name="MaDG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PHIEUMUON_NHANVIEN">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+    <End Role="PHIEUMUON" Type="Self.PHIEUMUON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MaNV" />
+      </Principal>
+      <Dependent Role="PHIEUMUON">
+        <PropertyRef Name="MaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SACH_LOAISACH">
+    <End Role="LOAISACH" Type="Self.LOAISACH" Multiplicity="1" />
+    <End Role="SACH" Type="Self.SACH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAISACH">
+        <PropertyRef Name="MaLS" />
+      </Principal>
+      <Dependent Role="SACH">
+        <PropertyRef Name="MaLS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLyThuVienModelStoreContainer">
+    <EntitySet Name="DOCGIA" EntityType="Self.DOCGIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOAIDG" EntityType="Self.LOAIDG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOAINV" EntityType="Self.LOAINV" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOAISACH" EntityType="Self.LOAISACH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHIEUMUON" EntityType="Self.PHIEUMUON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QUYDINH" EntityType="Self.QUYDINH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CHITIETPHIEUMUON" EntityType="Self.CHITIETPHIEUMUON" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CHITIETPHIEUMUON].[MaPM] AS [MaPM], 
+    [CHITIETPHIEUMUON].[MaSach] AS [MaSach], 
+    [CHITIETPHIEUMUON].[TinhTrang] AS [TinhTrang], 
+    [CHITIETPHIEUMUON].[NgayTra] AS [NgayTra], 
+    [CHITIETPHIEUMUON].[Xoa] AS [Xoa]
+    FROM [dbo].[CHITIETPHIEUMUON] AS [CHITIETPHIEUMUON]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CHITIETPHIEUMUON_PHIEUMUON" Association="Self.FK_CHITIETPHIEUMUON_PHIEUMUON">
+      <End Role="PHIEUMUON" EntitySet="PHIEUMUON" />
+      <End Role="CHITIETPHIEUMUON" EntitySet="CHITIETPHIEUMUON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHITIETPHIEUMUON_SACH" Association="Self.FK_CHITIETPHIEUMUON_SACH">
+      <End Role="SACH" EntitySet="SACH" />
+      <End Role="CHITIETPHIEUMUON" EntitySet="CHITIETPHIEUMUON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCGIA_LOAIDG" Association="Self.FK_DOCGIA_LOAIDG">
+      <End Role="LOAIDG" EntitySet="LOAIDG" />
+      <End Role="DOCGIA" EntitySet="DOCGIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NHANVIEN_LOAINV" Association="Self.FK_NHANVIEN_LOAINV">
+      <End Role="LOAINV" EntitySet="LOAINV" />
+      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHIEUMUON_DOCGIA" Association="Self.FK_PHIEUMUON_DOCGIA">
+      <End Role="DOCGIA" EntitySet="DOCGIA" />
+      <End Role="PHIEUMUON" EntitySet="PHIEUMUON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHIEUMUON_NHANVIEN" Association="Self.FK_PHIEUMUON_NHANVIEN">
+      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+      <End Role="PHIEUMUON" EntitySet="PHIEUMUON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SACH_LOAISACH" Association="Self.FK_SACH_LOAISACH">
+      <End Role="LOAISACH" EntitySet="LOAISACH" />
+      <End Role="SACH" EntitySet="SACH" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

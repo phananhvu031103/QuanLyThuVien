@@ -1,0 +1,146 @@
+﻿<Window x:Class="QuanLyThuVien.UserControlLibrary.AddPhieuMuonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien.UserControlLibrary"
+                mc:Ignorable="d"
+        Title="Thêm phiếu mượn" Height="450" Width="800"
+
+     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:uc="clr-namespace:QuanLyThuVien.UserControlLibrary"
+
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+
+    Name="addPhieuMuonWindow"
+
+    WindowStyle="None"
+    WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=loaiNhanVienWindow}">
+            </uc:ControlBarUC>
+        </Grid>
+        <materialDesign:Card  Grid.Row="1" Margin="5">
+            <WrapPanel>
+                <ComboBox Width="auto" DisplayMemberPath="MaDG" ItemsSource="{Binding THEDOCGIAList}" SelectedItem="{Binding SelectedTHEDOCGIA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" materialDesign:HintAssist.Hint="Mã độc giả" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                <TextBox IsReadOnly="True" Width="auto" Text="{Binding HoTen, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Tên độc giả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox IsReadOnly="True" Width="auto" Text="{Binding NgayMuon,StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Ngày mượn" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <Grid Grid.Row="2"  Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <materialDesign:ColorZone Grid.Row="0" Margin="5" CornerRadius="2" Panel.ZIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <WrapPanel>
+                        <materialDesign:ColorZone Mode="Standard" Padding="0" CornerRadius="2" Panel.ZIndex="1" Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{DynamicResource MaterialDesignToolButton}" Command="{Binding SearchCommand}">
+                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                </Button>
+                                <TextBox Grid.Column="1" Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" Margin="5" materialDesign:HintAssist.Hint="Tìm kiếm theo tên sách" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                      BorderThickness="0" MinWidth="200" VerticalAlignment="Center" />
+                            </Grid>
+                        </materialDesign:ColorZone>
+
+                        <Button Grid.Column="2" Padding="0" Margin="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="40"
+              ToolTip="Resource name: MaterialDesignRaisedLightButton" Command="{Binding ViewListCommand}">
+                            <materialDesign:PackIcon Kind="ViewList" />
+                        </Button>
+                    </WrapPanel>
+                </materialDesign:ColorZone>
+
+                <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView ItemsSource="{Binding SACHList}" SelectedItem="{Binding SelectedSACH, Mode=OneWayToSource}" Width="auto">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã sách" DisplayMemberBinding="{Binding MaSach}" Width="auto"></GridViewColumn>
+                                    <GridViewColumn Header="Tên sách" DisplayMemberBinding="{Binding TenSach}" Width="auto"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="54"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"></Grid>
+
+                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <Button Padding="0" Margin="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="40" ToolTip="Resource name: MaterialDesignRaisedLightButton" Command="{Binding PushCommand}">
+                        <materialDesign:PackIcon Kind="ArrowRightBold" />
+                    </Button>
+                    <Button Padding="0" Margin="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="40" ToolTip="Resource name: MaterialDesignRaisedLightButton" Command="{Binding PopCommand}" >
+                        <materialDesign:PackIcon Kind="ArrowLeftBold" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="54"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"></Grid>
+
+                <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView ItemsSource="{Binding CTPMList}" SelectedItem="{Binding SelectedCTPM, Mode=OneWayToSource}" Margin="10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã sách" DisplayMemberBinding="{Binding MaSach}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên sách" DisplayMemberBinding="{Binding TenSach}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+
+        <materialDesign:Card Grid.Row="3" Margin="5" Height="42" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+            <WrapPanel HorizontalAlignment="Right">
+                <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=addPhieuMuonWindow}" Content="Thêm" Margin="5" Width="80"></Button>
+                <Button Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addPhieuMuonWindow}" Content="Thoát" Margin="5" Width="80"></Button>
+            </WrapPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>
+

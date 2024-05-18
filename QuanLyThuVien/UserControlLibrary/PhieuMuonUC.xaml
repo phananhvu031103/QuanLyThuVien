@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="QuanLyThuVien.UserControlLibrary.PhieuMuonUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyThuVien.UserControlLibrary"
+             mc:Ignorable="d" 
+            d:DesignHeight="500" d:DesignWidth="900"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            Background="{DynamicResource MaterialDesignPaper}"
+            FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid Margin="0,0,-300,-5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--các element binding từ selected item-->
+
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="5,5,3,5" VerticalAlignment="Stretch">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" HorizontalAlignment="Stretch">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã phiếu mượn" DisplayMemberBinding="{Binding MaPM}" Width="auto"></GridViewColumn>
+                            <GridViewColumn Header="Mã độc giả" DisplayMemberBinding="{Binding MaDG}" Width="auto"></GridViewColumn>
+                            <GridViewColumn Header="Tên độc giả" DisplayMemberBinding="{Binding THEDOCGIA.HoTen}" Width="auto"></GridViewColumn>
+                            <GridViewColumn Header="Ngày mượn" DisplayMemberBinding="{Binding NgayMuon,StringFormat='dd/MM/yyyy'}" Width="auto"></GridViewColumn>
+                            <GridViewColumn Header="Ngày trả" DisplayMemberBinding="{Binding NgayTra,StringFormat='dd/MM/yyyy'}" Width="auto"></GridViewColumn>
+                            <GridViewColumn Header="Tiền phạt" DisplayMemberBinding="{Binding TienPhat}" Width="auto"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Margin="0,5,5,5" HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <WrapPanel Grid.Row="0">
+                    <TextBox IsReadOnly="True" Width="auto" Text="{Binding MaPM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Mã phiếu mượn" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </WrapPanel>
+                <WrapPanel Grid.Row="1">
+                    <TextBox IsReadOnly="True" Width="auto" Text="{Binding MaDG, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Mã độc giả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox IsReadOnly="True" Width="auto" Text="{Binding HoTen, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Tên độc giả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </WrapPanel>
+                <WrapPanel Grid.Row="2">
+                    <TextBox IsReadOnly="True" Width="auto" Text="{Binding NgayMuon,StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Ngày mượn" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox IsReadOnly="True" Width="auto" Text="{Binding NgayTra,StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Ngày trả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </WrapPanel>
+                <WrapPanel Grid.Row="3">
+                    <TextBox IsReadOnly="True" Width="auto" Text="{Binding TienPhat, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Margin="5" materialDesign:HintAssist.Hint="Tiền phạt" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </WrapPanel>
+                <Grid Grid.Row="4">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView ItemsSource="{Binding BookList}" HorizontalAlignment="Stretch" Margin="10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã sách" DisplayMemberBinding="{Binding MaSach}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên sách" DisplayMemberBinding="{Binding SACH.TenSach}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+                <materialDesign:Card Grid.Row="5" Margin="5" Height="42" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+                    <WrapPanel>
+                        <Button Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=ucPhieuMuon}" Content="Xác nhận trả sách" Margin="5" Width="auto"></Button>
+                        <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=ucPhieuMuon}" Content="Thêm" Margin="5" Width="80"></Button>
+                        <Button Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=ucPhieuMuon}" Content="Xóa" Margin="5" Width="80"></Button>
+                    </WrapPanel>
+                </materialDesign:Card>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

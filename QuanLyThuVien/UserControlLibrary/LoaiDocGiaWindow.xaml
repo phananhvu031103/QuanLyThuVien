@@ -1,0 +1,66 @@
+﻿<Window x:Class="QuanLyThuVien.UserControlLibrary.LoaiDocGiaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien.UserControlLibrary"
+        mc:Ignorable="d"
+        Title="Quản lý loại độc giả" Height="450" Width="450" 
+        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:QuanLyThuVien.UserControlLibrary"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Name="loaiDocGiaWindow"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=loaiDocGiaWindow}">
+            </uc:ControlBarUC>
+        </Grid>
+
+        <!--các element binding từ selected item-->
+        <materialDesign:Card Grid.Row="1" Margin="5">
+            <WrapPanel Margin="0 0 0 10">
+                <TextBox Text="{Binding TenLDG, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Tên loại độc giả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <WrapPanel>
+                <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
+                <Button Command="{Binding EditCommand}"  Content="Sửa" Margin="5" Width="100" ></Button>
+                <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="100" ></Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="3" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Width="auto">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã loại độc giả" DisplayMemberBinding="{Binding MaLDG}" Width="auto"></GridViewColumn>
+                            <GridViewColumn Header="Tên loại độc giả" DisplayMemberBinding="{Binding TenLDG}" Width="auto"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
+</Window>
